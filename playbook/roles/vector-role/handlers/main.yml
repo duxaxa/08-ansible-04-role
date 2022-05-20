@@ -1,0 +1,9 @@
+---
+# handlers file for vector-role
+- name: Start Vector service
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    enabled: false
+    name: vector.service
+    state: started

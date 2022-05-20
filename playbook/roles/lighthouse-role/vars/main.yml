@@ -1,0 +1,6 @@
+---
+# vars file for lighthouse-role
+lighthouse_code_src: "https://github.com/VKCOM/lighthouse.git"
+lighthouse_packages:
+  - git
+  - nginx

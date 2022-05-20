@@ -1,0 +1,21 @@
+---
+# tasks file for lighthouse-role
+
+- name: Lighthouse. Pre-install nginx & git client
+  become: true
+  ansible.builtin.apt:
+    name: "{{ lighthouse_packages }}"
+    update_cache: true
+
+- name: Lighthouse. Clone source code by git client
+  become: true
+  ansible.builtin.git:
+    repo: "{{ lighthouse_code_src }}"
+    dest: "{{ lighthouse_data_dir }}"
+
+- name: Lighthouse. Prepare nginx config
+  become: true
+  ansible.builtin.template:
+    src: "templates/nginx/ligthouse.conf.j2"
+    dest: "/etc/nginx/conf.d/{{ lighthouse_nginx_conf }}"
+  notify: Start Lighthouse service
